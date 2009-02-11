@@ -1,0 +1,6 @@
+logrotate_s3
+Mike Babineau <michael.babineau@gmail.com>
+
+Usage: logrotate_s3.py -c <config> -f <file>
+
+Rotates, compresses, and uploads a file to S3.  Read the comments in logrotate_s3.conf and insert your own values as needed.
