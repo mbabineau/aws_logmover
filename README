@@ -1,11 +1,22 @@
 aws_logmover.py
 Mike Babineau <michael.babineau@gmail.com>
-
+------------------
+Description:
 Script for moving logs files into and out of S3 using SQS messages for reference.
-Supports two modes:
-push - Renames a file (<unix time>.<hostname>.log.gz), uploads it to S3, and creates an SQS message containing the S3 location
+
+aws_logmover supports two modes:
+push - Renames a file, uploads it to S3, and creates an SQS message containing the S3 location
 pull - Reads in an SQS message, downloads the referenced file, then removes the message from the SQS queue
 
+In push mode, file is renamed using the following convention: <unix time>.<hostname>.log.gz
+
+------------------
+Requirements:
+-boto, a Python interface for Amazon Web Services (http://code.google.com/p/boto/).
+-AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, read in from same-named environment 
+variables, from boto.cfg (see boto manual), or from a specified config file (see README).
+
+------------------
 Usage: aws_logmover.py [options]
 
 Options:
