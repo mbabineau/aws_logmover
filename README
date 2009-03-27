@@ -1,6 +1,22 @@
-logrotate_s3
+aws_logmover.py
 Mike Babineau <michael.babineau@gmail.com>
 
-Usage: logrotate_s3.py -c <config> -f <file>
+Script for moving logs files into and out of S3 using SQS messages for reference.
+Supports two modes:
+push - Renames a file (<unix time>.<hostname>.log.gz), uploads it to S3, and creates an SQS message containing the S3 location
+pull - Reads in an SQS message, downloads the referenced file, then removes the message from the SQS queue
 
-Rotates, compresses, and uploads a file to S3.  Read the comments in logrotate_s3.conf and insert your own values as needed.
+Usage: aws_logmover.py [options]
+
+Options:
+  -h, --help            show this help message and exit
+  -m MODE, --mode=MODE  mode of the task ("push" or "pull")
+  -q QUEUE, --queue=QUEUE
+                        Amazon SQS queue name (ex: "acme_queue_1")
+  -f FILE, --file=FILE  (push) file to be moved (ex: "/var/log/httpd.log.1.gz")
+  -b BUCKET, --bucket=BUCKET
+                        (push) Amazon S3 bucket name (ex: "acme_bucket_1")
+  -o DIR, --output-dir=DIR
+                        (pull) output directory for retrieved file (ex:
+                        "/tmp/scratch")
+
