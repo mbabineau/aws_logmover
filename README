@@ -1,5 +1,6 @@
 aws_logmover.py
 Mike Babineau <michael.babineau@gmail.com>
+http://github.com/mbabineau/aws_logmover/
 ------------------
 Description:
 Script for moving logs files into and out of S3 using SQS messages for reference.
